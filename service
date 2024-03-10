@@ -1,0 +1,28 @@
+package service;
+
+import dao.ProductoDAO;
+import model.Producto;
+
+public class ProductoService {
+    private ProductoDAO productoDAO;
+
+    public ProductoService(ProductoDAO productoDAO) {
+        this.productoDAO = productoDAO;
+    }
+
+    public void agregarProducto(Producto producto) {
+        productoDAO.agregarProducto(producto);
+    }
+
+    public void actualizarProducto(Producto producto) {
+        productoDAO.actualizarProducto(producto);
+    }
+
+    public void eliminarProducto(String codigo) {
+        productoDAO.eliminarProducto(codigo);
+    }
+
+    public Producto consultarProducto(String codigo) {
+        return productoDAO.consultarProducto(codigo);
+    }
+}

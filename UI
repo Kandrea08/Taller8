@@ -1,0 +1,188 @@
+package ui;
+
+import dao.ProductoDAOImpl;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import model.Producto;
+import service.ProductoService;
+
+public class ProductoUI extends JFrame {
+    private JTextField txtCodigo, txtNombre, txtDescripcion, txtPrecioBase, txtPrecioVenta, txtCategoria, txtCantidad;
+    private JButton btnAgregar, btnActualizar, btnEliminar, btnConsultar;
+    private ProductoService productoService;
+
+    public ProductoUI(ProductoService productoService) {
+        this.productoService = productoService;
+
+        setTitle("Gestión de Inventario - KD-Electronics");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        initComponents();
+        initListeners();
+    }
+
+    private void initComponents() {
+        // Creación de los componentes de la interfaz
+        JLabel lblCodigo = new JLabel("Código:");
+        JLabel lblNombre = new JLabel("Nombre:");
+        JLabel lblDescripcion = new JLabel("Descripción:");
+        JLabel lblPrecioBase = new JLabel("Precio Base:");
+        JLabel lblPrecioVenta = new JLabel("Precio Venta:");
+        JLabel lblCategoria = new JLabel("Categoría:");
+        JLabel lblCantidad = new JLabel("Cantidad:");
+
+        txtCodigo = new JTextField(20);
+        txtNombre = new JTextField(20);
+        txtDescripcion = new JTextField(20);
+        txtPrecioBase = new JTextField(20);
+        txtPrecioVenta = new JTextField(20);
+        txtCategoria = new JTextField(20);
+        txtCantidad = new JTextField(20);
+
+        btnAgregar = new JButton("Agregar");
+        btnActualizar = new JButton("Actualizar");
+        btnEliminar = new JButton("Eliminar");
+        btnConsultar = new JButton("Consultar");
+
+        // Organización de los componentes en el panel
+        JPanel panel = new JPanel();
+        GroupLayout layout = new GroupLayout(panel);
+        panel.setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(lblCodigo)
+                        .addComponent(lblNombre)
+                        .addComponent(lblDescripcion)
+                        .addComponent(lblPrecioBase)
+                        .addComponent(lblPrecioVenta)
+                        .addComponent(lblCategoria)
+                        .addComponent(lblCantidad)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(txtCodigo)
+                        .addComponent(txtNombre)
+                        .addComponent(txtDescripcion)
+                        .addComponent(txtPrecioBase)
+                        .addComponent(txtPrecioVenta)
+                        .addComponent(txtCategoria)
+                        .addComponent(txtCantidad)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAgregar)
+                        .addComponent(btnActualizar)
+                        .addComponent(btnEliminar)
+                        .addComponent(btnConsultar)
+                )
+        );
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCodigo)
+                        .addComponent(txtCodigo)
+                        .addComponent(btnAgregar)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNombre)
+                        .addComponent(txtNombre)
+                        .addComponent(btnActualizar)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDescripcion)
+                        .addComponent(txtDescripcion)
+                        .addComponent(btnEliminar)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPrecioBase)
+                        .addComponent(txtPrecioBase)
+                        .addComponent(btnConsultar)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblPrecioVenta)
+                        .addComponent(txtPrecioVenta)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCategoria)
+                        .addComponent(txtCategoria)
+                )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCantidad)
+                        .addComponent(txtCantidad)
+                )
+        );
+
+        add(panel);
+    }
+
+    private void initListeners() {
+        // Agregar listener para el botón Agregar
+        btnAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarProducto();
+            }
+        });
+
+        // Agregar listener para el botón Actualizar
+        btnActualizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarProducto();
+            }
+        });
+
+        // Agregar listener para el botón Eliminar
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarProducto();
+            }
+        });
+
+        // Agregar listener para el botón Consultar
+        btnConsultar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                consultarProducto();
+            }
+        });
+    }
+
+    private void agregarProducto() {
+        String codigo = txtCodigo.getText();
+        String nombre = txtNombre.getText();
+        String descripcion = txtDescripcion.getText();
+        double precioBase = Double.parseDouble(txtPrecioBase.getText());
+        double precioVenta = Double.parseDouble(txtPrecioVenta.getText());
+        String categoria = txtCategoria.getText();
+        int cantidad = Integer.parseInt(txtCantidad.getText());
+
+        Producto producto = new Producto(codigo, nombre, descripcion, precioBase, precioVenta, categoria, cantidad);
+        productoService.agregarProducto(producto);
+    }
+
+    private void actualizarProducto() {
+        // Obtener datos de los campos
+        // Llamar al método de actualización del servicio
+    }
+
+    private void eliminarProducto() {
+        // Obtener el código del producto a eliminar
+        // Llamar al método de eliminación del servicio
+    }
+
+    private void consultarProducto() {
+        // Obtener el código del producto a consultar
+        // Llamar al método de consulta del servicio
+    }
+
+    public static void main(String[] args) {
+        ProductoService productoService = new ProductoService(new ProductoDAOImpl());
+        ProductoUI productoUI = new ProductoUI(productoService);
+        productoUI.setVisible(true);
+    }
+}

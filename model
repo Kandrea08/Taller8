@@ -1,0 +1,20 @@
+package model;
+
+public class Producto {
+
+    public Producto(String codigo1, String nombre1, String descripcion1, double precioBase1, double precioVenta1, String categoria1, int cantidad) {
+    }
+    private String codigo;
+    private String nombre;
+    private String descripcion;
+    private double precioBase;
+    private double precioVenta;
+    private String categoria;
+    private int cantidadDisponible;
+
+    // Constructor, getters y setters
+
+    public String getCodigo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}

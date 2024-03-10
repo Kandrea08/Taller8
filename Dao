@@ -1,0 +1,46 @@
+package dao;
+
+import model.Producto;
+
+public interface ProductoDAO {
+    void agregarProducto(Producto producto);
+    void actualizarProducto(Producto producto);
+    void eliminarProducto(String codigo);
+    Producto consultarProducto(String codigo);
+}
+
+
+package dao;
+
+import java.util.HashMap;
+import java.util.Map;
+import model.Producto;
+
+public class ProductoDAOImpl implements ProductoDAO {
+    private Map<String, Producto> inventario;
+
+    public ProductoDAOImpl() {
+        this.inventario = new HashMap<>();
+    }
+
+    @Override
+    public void agregarProducto(Producto producto) {
+        inventario.put(producto.getCodigo(), producto);
+    }
+
+    @Override
+    public void actualizarProducto(Producto producto) {
+        inventario.put(producto.getCodigo(), producto);
+    }
+
+    @Override
+    public void eliminarProducto(String codigo) {
+        // No se elimina físicamente, se puede implementar lógica para marcar como "inactivo"
+        inventario.remove(codigo);
+    }
+
+    @Override
+    public Producto consultarProducto(String codigo) {
+        return inventario.get(codigo);
+    }
+}
